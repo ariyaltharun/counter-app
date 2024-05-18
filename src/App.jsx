@@ -5,6 +5,16 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [data, setData] = useState("")
+
+  const handleClick = async () => {
+    setCount((count) => count+1); 
+    
+    const reponse = await fetch("https://ariyal-ksp-datathon-backend.hf.space/");
+    const res = await reponse.json()
+    setData(res["API Test"]);
+    console.log(res);
+  }
 
   return (
     <>
@@ -18,11 +28,14 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={handleClick}>
           count is {count}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+        <p>
+          Test API: {data}
         </p>
       </div>
       <p className="read-the-docs">
